@@ -1,0 +1,128 @@
+{
+  "name": "My workflow 7",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Anda adalah chatbot AI yang membantu menjawab pertanyaan tentang teknologi dan pemrograman dasar. \nJawablah dengan bahasa yang jelas, ringkas, dan mudah dipahami oleh mahasiswa."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "172239f4-609f-455d-b2e8-215e0a13f432",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        64,
+        240
+      ],
+      "id": "0a87c431-aa25-48e9-a542-276fd9098f81",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KDmm8ePb8pL43GXh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        240
+      ],
+      "id": "7b52fcad-6b64-4061-befc-f425dfd91117",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nMy name is Lantip. How can I assist you today?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -192,
+        0
+      ],
+      "id": "8da10a99-eccc-4d41-b193-7696eaf13719",
+      "name": "Kirim Pesan",
+      "webhookId": "8f2a881a-a340-4dfa-bcd9-154403acdf62"
+    }
+  ],
+  "pinData": {
+    "Kirim Pesan": [
+      {
+        "json": {
+          "action": "sendMessage",
+          "sessionId": "50545f46-c130-480f-8d34-4a396a9e9001",
+          "chatInput": "Halo"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kirim Pesan": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "18879a56-5081-4e0e-a977-8a3a4c2e5a7a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc8a611dcad260b774c1ce09e9f57dfbdff4629833401a9ab323470bb2ead12e"
+  },
+  "id": "RljwaDUZRbFNKVtf",
+  "tags": []
+}
